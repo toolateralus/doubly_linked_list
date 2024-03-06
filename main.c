@@ -14,7 +14,7 @@ test_t *make_test_struct(int a, int b, char c) {
   test->c = c;
   return test;
 }
-void mass_test() {
+void test_push_pop() {
   
   char input = 0;
   
@@ -58,8 +58,27 @@ void mass_test() {
   }
 }
 
+void test_element_at() {
+  List *list = list_new(sizeof(test_t));
+  push(list, make_test_struct(1, 2, 3));
+  push(list, make_test_struct(4, 5, 6));
+  push(list, make_test_struct(7, 8, 9));
+  
+  
+  for (int i = 0; i < 3; ++i) {
+    test_t *element = (test_t *)at(list, i);
+    if (element == NULL) {
+      printf ("fetched element at index %d was null", i);
+      return;
+    }
+    printf("element at %d: %d, %d, %d\n",i, element->a, element->b, element->c);
+  }
+  
+}
+
 int main(int argc, char **argv) {
-  mass_test();
+  test_element_at();
+  test_push_pop();
   return 0;
 }
 
